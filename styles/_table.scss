@@ -42,6 +42,8 @@
 
 		& > tr:hover,
 		& > tr:focus {
+			background-color: $accent-1;
+
 			.btn__edit {
 				color: $color-warning;
 
