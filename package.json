@@ -1,0 +1,44 @@
+{
+	"name": "next-crud",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/roldanjr/next-crud.git",
+	"author": "Roldan Montilla Jr <roldanjrmontilla@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+		"lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx}\"",
+		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,json,md}\""
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --fix"
+		]
+	},
+	"dependencies": {
+		"next": "^9.5.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.9.0",
+		"eslint-config-react-app": "^5.2.1",
+		"eslint-plugin-flowtype": "^5.2.0",
+		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-jsx-a11y": "^6.3.1",
+		"eslint-plugin-react": "^7.21.2",
+		"eslint-plugin-react-hooks": "^4.1.2",
+		"husky": "^4.3.0",
+		"lint-staged": "^10.4.0",
+		"prettier": "^2.1.2"
+	}
+}
