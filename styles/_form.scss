@@ -1,0 +1,28 @@
+.form {
+	width: 100%;
+	height: 100%;
+	padding: 1.6rem;
+
+	display: flex;
+	flex-direction: column;
+
+	&__element {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__element:not(:last-child) {
+		margin-bottom: 1.2rem;
+	}
+
+	&__action {
+		margin-top: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		& > button:first-of-type {
+			margin-right: 1rem;
+		}
+	}
+}

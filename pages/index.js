@@ -1,5 +1,14 @@
+import { Header, Layout, Modal, Pagination, Table } from "@/components";
+
 function Landing() {
-	return <div>Hello Good Afternoon!</div>;
+	return (
+		<Layout>
+			<Header />
+			<Table />
+			<Pagination />
+			<Modal />
+		</Layout>
+	);
 }
 
 export default Landing;

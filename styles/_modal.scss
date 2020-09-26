@@ -1,0 +1,49 @@
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+
+	background-color: $color-shadow;
+
+	&__content {
+		max-width: 36rem;
+		height: max-content;
+
+		margin: auto;
+		margin-top: 8rem;
+
+		border-radius: 3px;
+		background-color: $color-bg;
+		box-shadow: $shadow-lg;
+	}
+
+	&__header {
+		padding-left: 2.4rem;
+		height: 6.4rem;
+
+		.btn__close {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin-top: 1.2rem;
+			margin-right: 1.2rem;
+			border-radius: 50%;
+
+			& > svg {
+				margin: 0;
+			}
+
+			&:hover {
+				color: $color-error;
+			}
+		}
+	}
+
+	&__form {
+		padding: 2.4rem !important;
+		padding-bottom: 2rem !important;
+	}
+}

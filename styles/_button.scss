@@ -1,0 +1,39 @@
+.btn {
+	padding: 0.8rem 2.4rem;
+	border-radius: 3px;
+	border: none;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-weight: 500;
+	font-size: 1.4rem;
+	text-transform: capitalize;
+
+	background-color: $accent-2;
+
+	@include easing;
+
+	&__primary {
+		background-color: $color-success;
+		color: $color-bg;
+		box-shadow: $shadow-nm;
+
+		&:hover {
+			background-color: rgba($color-success, 0.9);
+			box-shadow: $shadow-md;
+		}
+	}
+
+	&__compact {
+		padding: 0.4rem;
+	}
+
+	&__icon {
+		& > svg {
+			margin-left: -0.8rem;
+			margin-right: 0.8rem;
+		}
+	}
+}

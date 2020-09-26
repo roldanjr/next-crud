@@ -1,0 +1,25 @@
+.input {
+	padding: 0.8rem 1.2rem;
+
+	border-radius: 3px;
+	border: 1px solid $accent-2;
+	background-color: $accent-1;
+
+	font-weight: 500;
+
+	@include easing;
+
+	&:focus {
+		border-color: $color-success;
+		box-shadow: 0 0 0 2px rgba($color-success, 0.16);
+	}
+
+	&::placeholder {
+		font-weight: normal;
+		color: $accent-4;
+	}
+
+	&[type="number"]::-webkit-inner-spin-button {
+		display: none;
+	}
+}

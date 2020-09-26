@@ -9,11 +9,15 @@ $accent-7: #333333;
 $accent-8: #111111;
 $color-fg: #000000;
 
-$color-error: #e00;
-$color-error-dark: #c50000;
-
 $color-success: #0070f3;
-$color-success-dark: #0761d1;
 
-$color-warning: #f5a623;
-$color-warning-dark: #ab570a;
+$color-warning: #ab570a;
+
+$color-error: #c50000;
+
+$color-shadow: rgba(0, 0, 0, 0.16);
+
+$shadow-sm: 0 1px 4px -2px $color-shadow;
+$shadow-nm: 0 2px 12px -4px $color-shadow;
+$shadow-md: 0 4px 12px -4px $color-shadow;
+$shadow-lg: 0 8px 16px -6px $color-shadow;

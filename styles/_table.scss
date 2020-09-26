@@ -1,0 +1,63 @@
+.table {
+	width: 100%;
+	height: 100%;
+
+	border-spacing: 0;
+	border-collapse: collapse;
+	table-layout: auto;
+
+	&__head {
+		& > tr {
+			height: 5.6rem;
+			text-align: left;
+
+			& > th {
+				padding: 0 1.6rem;
+			}
+
+			& > th:last-of-type {
+				text-align: center;
+			}
+		}
+	}
+
+	&__body {
+		& > tr {
+			height: 5.2rem;
+			border-top: 1px solid $accent-2;
+
+			& > td {
+				padding: 0.8rem 1.6rem;
+			}
+
+			& > td:last-of-type {
+				height: 100%;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 0.8rem;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
+		& > tr:hover,
+		& > tr:focus {
+			.btn__edit {
+				color: $color-warning;
+
+				&:hover {
+					color: $color-bg;
+					background-color: $color-warning;
+				}
+			}
+			.btn__delete {
+				color: $color-error;
+
+				&:hover {
+					color: $color-bg;
+					background-color: $color-error;
+				}
+			}
+		}
+	}
+}

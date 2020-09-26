@@ -2,8 +2,11 @@
 *::before,
 *::after {
 	box-sizing: border-box;
+	outline: none;
 	padding: 0;
 	margin: 0;
+	font-size: inherit;
+	font-family: inherit;
 }
 
 html {
@@ -15,4 +18,17 @@ html {
 body {
 	line-height: 1.6;
 	font-size: 1.6rem;
+	color: $accent-6;
+	background-color: $accent-1;
+}
+
+svg {
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+::selection {
+	color: $color-bg;
+	background-color: $color-success;
 }

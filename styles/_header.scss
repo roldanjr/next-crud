@@ -1,0 +1,38 @@
+%heading {
+	font-weight: 500;
+	color: $accent-8;
+
+	& > span {
+		font-weight: 700;
+	}
+}
+
+.header {
+	padding: 0.8rem 1.6rem;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+
+		width: 100%;
+		height: 2px;
+
+		background-color: $accent-6;
+	}
+
+	&__h1 {
+		@extend %heading;
+		font-size: 3.2rem;
+	}
+
+	&__h2 {
+		@extend %heading;
+		font-size: 2.4rem;
+	}
+}
