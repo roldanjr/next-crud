@@ -1,11 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
 import { PencilSVG, TrashSVG } from "@/icons";
 import { deleteEmployee, setModalOpen, setSelectedEmployee } from "@/store";
+import { useEffect } from "react";
 
 export function Table() {
 	const state = useSelector((state) => state.employee);
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		fetch("/api/employees")
+			.then((res) => res.json())
+			.then((data) => console.log(data));
+	}, []);
 
 	return (
 		<table className="table">
