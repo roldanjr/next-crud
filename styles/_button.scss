@@ -20,7 +20,8 @@
 		color: $color-bg;
 		box-shadow: $shadow-nm;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: rgba($color-success, 0.9);
 			box-shadow: $shadow-md;
 		}
@@ -34,6 +35,13 @@
 		& > svg {
 			margin-left: -0.8rem;
 			margin-right: 0.8rem;
+		}
+	}
+
+	&__cancel {
+		&:hover,
+		&:focus {
+			color: $color-error;
 		}
 	}
 }

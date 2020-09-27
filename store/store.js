@@ -6,8 +6,6 @@ import rootReducer from "./reducers";
 
 const store = createStore(rootReducer, devToolsEnhancer());
 
-export const makeStore = () => store;
+const makeStore = () => store;
 
 export const wrapper = createWrapper(makeStore);
-
-export default store;

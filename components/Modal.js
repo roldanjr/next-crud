@@ -1,29 +1,55 @@
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import cx from "clsx";
 
 import { CheckSVG, CloseSVG } from "@/icons";
-import { setModalOpen } from "@/store";
+import {
+	addEmployee,
+	setModalOpen,
+	setSelectedEmployee,
+	updateEmployee,
+} from "@/store";
 
 export function Modal() {
-	const { register, handleSubmit, errors, reset } = useForm();
+	const { register, handleSubmit, errors, reset, setValue } = useForm();
 
-	const state = useSelector((state) => state.main);
+	const state = useSelector((state) => state.employee);
 
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
 		reset();
 		dispatch(setModalOpen(false));
+		dispatch(setSelectedEmployee(null));
 	};
 
 	const onSubmitHandler = (data) => {
 		if (data) {
 			closeModal();
 		}
-		console.log(data);
+		if (state.selectedEmployee) {
+			dispatch(
+				updateEmployee({
+					id: state.selectedEmployee.id,
+					...data,
+				})
+			);
+		} else {
+			dispatch(addEmployee(data));
+		}
 	};
+
+	useEffect(() => {
+		if (state.selectedEmployee) {
+			setValue("name", state.selectedEmployee.name);
+			setValue("email", state.selectedEmployee.email);
+			setValue("address", state.selectedEmployee.address);
+			setValue("phone", state.selectedEmployee.phone);
+		}
+	}, [state.selectedEmployee, setValue]);
 
 	return state.isModalOpen
 		? ReactDOM.createPortal(
@@ -31,7 +57,15 @@ export function Modal() {
 					<div className="modal__content">
 						<header className="header modal__header">
 							<h1 className="header__h2">
-								Add <span>Employee</span>
+								{state.selectedEmployee ? (
+									<>
+										Edit <span>Employee</span>
+									</>
+								) : (
+									<>
+										Add <span>Employee</span>
+									</>
+								)}
 							</h1>
 							<button
 								className="btn btn__compact btn__close"
@@ -49,9 +83,9 @@ export function Modal() {
 							<div className="form__element">
 								<label
 									htmlFor="nameInput"
-									className={cx("label", errors.fullName && "label--error")}
+									className={cx("label", errors.name && "label--error")}
 								>
-									{errors.fullName ? (
+									{errors.name ? (
 										"Full name is required!"
 									) : (
 										<>
@@ -62,9 +96,9 @@ export function Modal() {
 								<input
 									type="text"
 									id="nameInput"
-									name="fullName"
+									name="name"
 									placeholder="Full name"
-									className={cx("input", errors.fullName && "input--error")}
+									className={cx("input", errors.name && "input--error")}
 									ref={register({ required: true })}
 								/>
 							</div>
@@ -156,14 +190,14 @@ export function Modal() {
 
 							<div className="form__action">
 								<button
-									className="btn btn__icon"
+									className="btn btn__icon btn__cancel"
 									type="button"
 									onClick={closeModal}
 								>
 									<CloseSVG /> Cancel
 								</button>
 								<button className="btn btn__primary btn__icon" type="submit">
-									<CheckSVG /> Submit
+									<CheckSVG /> {state.selectedEmployee ? "Update" : "Submit"}
 								</button>
 							</div>
 						</form>

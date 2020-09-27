@@ -1,6 +1,12 @@
+import { useSelector, useDispatch } from "react-redux";
 import { PencilSVG, TrashSVG } from "@/icons";
+import { deleteEmployee, setModalOpen, setSelectedEmployee } from "@/store";
 
 export function Table() {
+	const state = useSelector((state) => state.employee);
+
+	const dispatch = useDispatch();
+
 	return (
 		<table className="table">
 			<thead className="table__head">
@@ -14,34 +20,33 @@ export function Table() {
 			</thead>
 
 			<tbody className="table__body">
-				<tr>
-					<td>Roldan Montilla Jr</td>
-					<td>roldanjrmontilla@gmail.com</td>
-					<td>Lupon Davao Oriental</td>
-					<td>09562031579</td>
-					<td>
-						<button className="btn btn__compact btn__edit">
-							<PencilSVG />
-						</button>
-						<button className="btn btn__compact btn__delete">
-							<TrashSVG />
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td>Remark Montilla</td>
-					<td>remarkmontilla@gmail.com</td>
-					<td>Lupon Davao Oriental</td>
-					<td>09566782760</td>
-					<td>
-						<button className="btn btn__compact btn__edit">
-							<PencilSVG />
-						</button>
-						<button className="btn btn__compact btn__delete">
-							<TrashSVG />
-						</button>
-					</td>
-				</tr>
+				{state.employees.map(({ id, name, email, address, phone }) => (
+					<tr key={id}>
+						<td>{name}</td>
+						<td>{email}</td>
+						<td>{address}</td>
+						<td>{phone}</td>
+						<td>
+							<button
+								className="btn btn__compact btn__edit"
+								onClick={() => {
+									dispatch(setSelectedEmployee(id));
+									dispatch(setModalOpen(true));
+								}}
+							>
+								<PencilSVG />
+							</button>
+							<button
+								className="btn btn__compact btn__delete"
+								onClick={() => {
+									dispatch(deleteEmployee(id));
+								}}
+							>
+								<TrashSVG />
+							</button>
+						</td>
+					</tr>
+				))}
 			</tbody>
 		</table>
 	);
