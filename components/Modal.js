@@ -1,12 +1,29 @@
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import cx from "clsx";
+
 import { CheckSVG, CloseSVG } from "@/icons";
 import { setModalOpen } from "@/store";
 
 export function Modal() {
+	const { register, handleSubmit, errors, reset } = useForm();
+
 	const state = useSelector((state) => state.main);
 
 	const dispatch = useDispatch();
+
+	const closeModal = () => {
+		reset();
+		dispatch(setModalOpen(false));
+	};
+
+	const onSubmitHandler = (data) => {
+		if (data) {
+			closeModal();
+		}
+		console.log(data);
+	};
 
 	return state.isModalOpen
 		? ReactDOM.createPortal(
@@ -18,65 +35,131 @@ export function Modal() {
 							</h1>
 							<button
 								className="btn btn__compact btn__close"
-								onClick={() => {
-									dispatch(setModalOpen(false));
-								}}
+								onClick={closeModal}
 							>
 								<CloseSVG />
 							</button>
 						</header>
 
-						<form className="form modal__form">
+						<form
+							className="form modal__form"
+							onSubmit={handleSubmit(onSubmitHandler)}
+							noValidate
+						>
 							<div className="form__element">
-								<label htmlFor="nameInput" className="label">
-									Full name
+								<label
+									htmlFor="nameInput"
+									className={cx("label", errors.fullName && "label--error")}
+								>
+									{errors.fullName ? (
+										"Full name is required!"
+									) : (
+										<>
+											Full name&nbsp;<span className="label__required">*</span>
+										</>
+									)}
 								</label>
 								<input
 									type="text"
-									className="input"
 									id="nameInput"
+									name="fullName"
 									placeholder="Full name"
+									className={cx("input", errors.fullName && "input--error")}
+									ref={register({ required: true })}
 								/>
 							</div>
 
 							<div className="form__element">
-								<label htmlFor="emailInput" className="label">
-									Email
+								<label
+									htmlFor="emailInput"
+									className={cx("label", errors.email && "label--error")}
+								>
+									{errors.email ? (
+										`${errors.email.message}`
+									) : (
+										<>
+											Email&nbsp;<span className="label__required">*</span>
+										</>
+									)}
 								</label>
 								<input
 									type="email"
-									className="input"
 									id="emailInput"
+									name="email"
 									placeholder="Email"
+									className={cx("input", errors.email && "input--error")}
+									ref={register({
+										required: "Email is required!",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+											message: "Invalid email address!",
+										},
+									})}
 								/>
 							</div>
 
 							<div className="form__element">
-								<label htmlFor="addressArea" className="label">
-									Address
+								<label
+									htmlFor="addressArea"
+									className={cx("label", errors.address && "label--error")}
+								>
+									{errors.address ? (
+										"Address is required!"
+									) : (
+										<>
+											Address&nbsp;<span className="label__required">*</span>
+										</>
+									)}
 								</label>
 								<textarea
 									type="text"
-									className="area"
 									id="addressArea"
+									name="address"
 									placeholder="Address"
+									className={cx("area", errors.address && "input--error")}
+									ref={register({ required: true })}
 								/>
 							</div>
 
 							<div className="form__element">
-								<label htmlFor="phoneNumber" className="label">
-									Phone
+								<label
+									htmlFor="phoneNumber"
+									className={cx("label", errors.phone && "label--error")}
+								>
+									{errors.phone ? (
+										`${errors.phone.message}`
+									) : (
+										<>
+											Phone&nbsp;<span className="label__required">*</span>
+										</>
+									)}
 								</label>
 								<input
 									type="number"
-									className="input"
 									id="phoneNumber"
+									name="phone"
 									placeholder="Phone"
+									className={cx("input", errors.phone && "input--error")}
+									ref={register({
+										required: "Phone is required!",
+										minLength: {
+											value: 11,
+											message: "Minimum of 11 digits",
+										},
+										maxLength: {
+											value: 12,
+											message: "Maximum of 12 digits",
+										},
+									})}
 								/>
 							</div>
 
 							<div className="form__action">
-								<button className="btn btn__icon" type="button">
+								<button
+									className="btn btn__icon"
+									type="button"
+									onClick={closeModal}
+								>
 									<CloseSVG /> Cancel
 								</button>
 								<button className="btn btn__primary btn__icon" type="submit">

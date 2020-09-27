@@ -4,4 +4,12 @@
 	color: $accent-5;
 
 	margin-bottom: 0.4rem;
+
+	&__required {
+		color: $color-error;
+	}
+
+	&--error {
+		color: $color-error;
+	}
 }
