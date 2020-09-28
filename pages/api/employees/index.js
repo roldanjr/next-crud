@@ -1,7 +1,5 @@
-import dbConnect from "@/utils/dbConnect";
 import Employee from "@/models/Employee";
-
-dbConnect();
+import "@/utils/dbConnect";
 
 export default async (req, res) => {
 	const { method } = req;
@@ -34,7 +32,7 @@ export default async (req, res) => {
 			}
 		default:
 			res.setHeaders("Allow", ["GET", "POST"]);
-			res
+			return res
 				.status(405)
 				.json({ success: false })
 				.end(`Method ${method} Not Allowed`);

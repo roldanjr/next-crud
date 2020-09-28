@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connection = {};
 
-async function dbConnect() {
+(async function dbConnect() {
 	if (connection.isConnected) {
 		return;
 	}
@@ -21,6 +21,4 @@ async function dbConnect() {
 	} catch (error) {
 		console.log(error);
 	}
-}
-
-export default dbConnect;
+})();
