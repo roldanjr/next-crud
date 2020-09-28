@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"clsx": "^1.1.1",
+		"mongoose": "^5.10.7",
 		"next": "^9.5.3",
 		"next-redux-wrapper": "^6.0.2",
 		"prop-types": "^15.7.2",
