@@ -1,46 +1,34 @@
-import { v4 as uuid } from "uuid";
+import { HYDRATE } from "next-redux-wrapper";
 import * as t from "../types";
 
 const initialState = {
-	employees: [
-		{
-			id: uuid(),
-			name: "Roldan Montilla Jr",
-			email: "roldanjrmontilla@gmail.com",
-			address: "Lupon Davao Oriental",
-			phone: "09562031579",
-		},
-		{
-			id: uuid(),
-			name: "Remark Montilla",
-			email: "remarkmontilla@gmail.com",
-			address: "Lupon Davao Oriental",
-			phone: "09566782760",
-		},
-	],
-	selectedEmployee: null,
+	employeeList: [],
+	selectedEmployee: undefined,
 	isModalOpen: false,
 };
 
 const mainReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case t.SHOW_MODAL:
+		case HYDRATE:
+			return { ...state, ...action.payload };
+		case t.MODAL_OPEN:
 			return {
 				...state,
 				isModalOpen: action.payload,
 			};
-		case t.ADD_EMPLOYEE:
-			const newEmployee = {
-				id: uuid(),
-				...action.payload,
-			};
+		case t.EMPLOYEE_FETCH_SUCCEEDED:
 			return {
 				...state,
-				employees: [newEmployee, ...state.employees],
+				employeeList: action.payload,
 			};
-		case t.UPDATE_EMPLOYEE:
-			const updatedEmployee = state.employees.map((employee) => {
-				if (employee.id === action.payload.id) {
+		case t.EMPLOYEE_ADD_SUCCEEDED:
+			return {
+				...state,
+				employeeList: [action.payload, ...state.employeeList],
+			};
+		case t.EMPLOYEE_UPDATE_SUCCEEDED:
+			const updatedEmployee = state.employeeList.map((employee) => {
+				if (employee._id === action.payload._id) {
 					return {
 						...employee,
 						name: action.payload.name,
@@ -52,18 +40,18 @@ const mainReducer = (state = initialState, action) => {
 				return employee;
 			});
 
-			return { ...state, employees: updatedEmployee };
-		case t.DELETE_EMPLOYEE:
-			const newEmployeeList = state.employees.filter(
-				(employee) => employee.id !== action.payload
+			return { ...state, employeeList: updatedEmployee };
+		case t.EMPLOYEE_DELETE_SUCCEEDED:
+			const newEmployeeList = state.employeeList.filter(
+				(employee) => employee._id !== action.payload
 			);
 			return {
 				...state,
-				employees: newEmployeeList,
+				employeeList: newEmployeeList,
 			};
-		case t.SELECT_EMPLOYEE:
-			const selectedEmployee = state.employees.find(
-				(employee) => employee.id === action.payload
+		case t.EMPLOYEE_SELECTED:
+			const selectedEmployee = state.employeeList.find(
+				(employee) => employee._id === action.payload
 			);
 			return {
 				...state,

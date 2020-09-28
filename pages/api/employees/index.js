@@ -7,7 +7,9 @@ export default async (req, res) => {
 	switch (method) {
 		case "GET":
 			try {
-				const employees = await Employee.find({});
+				const employees = await Employee.find({}).sort({
+					createdAt: "desc",
+				});
 
 				return res.status(200).json({
 					success: true,

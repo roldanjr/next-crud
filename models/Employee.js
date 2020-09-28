@@ -23,6 +23,7 @@ const EmployeeSchema = new mongoose.Schema({
 		required: [true, "Phone is required!"],
 		trim: true,
 	},
+	createdAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.models.Employee ||

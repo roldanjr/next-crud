@@ -1,5 +1,4 @@
 import Employee from "@/models/Employee";
-import { deleteEmployee } from "@/store";
 import "@/utils/dbConnect";
 
 export default async (req, res) => {
@@ -44,7 +43,7 @@ export default async (req, res) => {
 
 				return res.status(200).json({
 					success: true,
-					data: {},
+					data: { id },
 				});
 			} catch (error) {
 				return res.status(400).json({

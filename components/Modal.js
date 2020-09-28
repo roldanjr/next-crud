@@ -23,7 +23,7 @@ export function Modal() {
 	const closeModal = () => {
 		reset();
 		dispatch(setModalOpen(false));
-		dispatch(setSelectedEmployee(null));
+		dispatch(setSelectedEmployee(undefined));
 	};
 
 	const onSubmitHandler = (data) => {
@@ -33,7 +33,7 @@ export function Modal() {
 		if (state.selectedEmployee) {
 			dispatch(
 				updateEmployee({
-					id: state.selectedEmployee.id,
+					_id: state.selectedEmployee._id,
 					...data,
 				})
 			);

@@ -1,6 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { PencilSVG, TrashSVG } from "@/icons";
-import { deleteEmployee, setModalOpen, setSelectedEmployee } from "@/store";
+import {
+	deleteEmployee,
+	fetchEmployees,
+	setModalOpen,
+	setSelectedEmployee,
+} from "@/store";
 import { useEffect } from "react";
 
 export function Table() {
@@ -9,10 +14,8 @@ export function Table() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		fetch("/api/employees")
-			.then((res) => res.json())
-			.then((data) => console.log(data));
-	}, []);
+		dispatch(fetchEmployees());
+	}, [dispatch]);
 
 	return (
 		<table className="table">
@@ -27,8 +30,8 @@ export function Table() {
 			</thead>
 
 			<tbody className="table__body">
-				{state.employees.map(({ id, name, email, address, phone }) => (
-					<tr key={id}>
+				{state.employeeList.map(({ _id, name, email, address, phone }) => (
+					<tr key={_id}>
 						<td>{name}</td>
 						<td>{email}</td>
 						<td>{address}</td>
@@ -37,7 +40,7 @@ export function Table() {
 							<button
 								className="btn btn__compact btn__edit"
 								onClick={() => {
-									dispatch(setSelectedEmployee(id));
+									dispatch(setSelectedEmployee(_id));
 									dispatch(setModalOpen(true));
 								}}
 							>
@@ -46,7 +49,7 @@ export function Table() {
 							<button
 								className="btn btn__compact btn__delete"
 								onClick={() => {
-									dispatch(deleteEmployee(id));
+									dispatch(deleteEmployee(_id));
 								}}
 							>
 								<TrashSVG />

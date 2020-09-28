@@ -1,10 +1,19 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { createWrapper } from "next-redux-wrapper";
-import { devToolsEnhancer } from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
+import createMiddleware from "redux-saga";
 
 import rootReducer from "./reducers";
+import rootSaga from "./sagas";
 
-const store = createStore(rootReducer, devToolsEnhancer());
+const sagaMiddleware = createMiddleware();
+
+const store = createStore(
+	rootReducer,
+	composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
+
+sagaMiddleware.run(rootSaga);
 
 const makeStore = () => store;
 
