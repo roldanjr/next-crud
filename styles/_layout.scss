@@ -9,4 +9,9 @@
 	box-shadow: $shadow-sm;
 
 	overflow: hidden;
+
+	@include media(768px) {
+		margin: 0;
+		max-width: 100%;
+	}
 }

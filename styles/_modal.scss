@@ -6,6 +6,8 @@
 	bottom: 0;
 	z-index: 1000;
 
+	overflow-y: scroll;
+
 	background-color: $color-shadow;
 
 	&__content {
@@ -18,6 +20,15 @@
 		border-radius: 3px;
 		background-color: $color-bg;
 		box-shadow: $shadow-lg;
+
+		@include media(768px) {
+			margin-top: 4rem;
+		}
+
+		@include media(375px) {
+			margin: 2rem;
+			margin-top: 4rem;
+		}
 	}
 
 	&__header {

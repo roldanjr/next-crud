@@ -36,6 +36,16 @@
 			margin-left: -0.8rem;
 			margin-right: 0.8rem;
 		}
+
+		@include media(425px) {
+			& > svg {
+				margin: 0;
+			}
+
+			& > span {
+				display: none;
+			}
+		}
 	}
 
 	&__cancel {

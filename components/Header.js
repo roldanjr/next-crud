@@ -16,7 +16,7 @@ export function Header() {
 					dispatch(setModalOpen(true));
 				}}
 			>
-				<PersonAddSVG /> Add new
+				<PersonAddSVG /> <span>Add new</span>
 			</button>
 		</header>
 	);

@@ -62,4 +62,20 @@
 			}
 		}
 	}
+
+	@include media(768px) {
+		&__head > tr,
+		&__body > tr {
+			& > th:nth-child(4),
+			& > th:nth-child(3),
+			& > th:nth-child(2) {
+				display: none;
+			}
+			& > td:nth-child(4),
+			& > td:nth-child(3),
+			& > td:nth-child(2) {
+				display: none;
+			}
+		}
+	}
 }

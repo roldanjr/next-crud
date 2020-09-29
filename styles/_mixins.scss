@@ -1,3 +1,9 @@
 @mixin easing {
 	transition: all 320ms ease;
 }
+
+@mixin media($screen) {
+	@media screen and (max-width: $screen) {
+		@content;
+	}
+}
