@@ -4,7 +4,7 @@ export function Layout({ children }) {
 	return (
 		<main className="layout">
 			<Head>
-				<title>NextJS - Simple CRUD App</title>
+				<title>NextJS | Full-stack CRUD App</title>
 			</Head>
 			{children}
 		</main>
